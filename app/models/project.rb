@@ -1,6 +1,8 @@
 class Project < ApplicationRecord
-  #RATINGS = ['carpentry', 'electricity', 'plumbing']
-    belongs_to :user
+  belongs_to :user
+
+  has_many :messages, dependent: :destroy
+  validates :title, presence: true
 
 
   has_many :messages, dependent: :destroy
