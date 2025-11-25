@@ -4,6 +4,15 @@
     Create a New Project
   </h1>
 
+<%= simple_form_for(@project) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :category, collection: ["Hammer", "Screwdriver", "Axe","Saw","Drill","Tape measure"] %>
+  <%= f.input :tools, collection: ["Screw","Nail","Plywood","Washers","Anchors","Varnish","Pipes","Gaskets","Wires","Switches","Outlets","Light", "Cables"] %>
+  <%= f.input :prompt %>
+
+  <%= f.submit %>
+<% end %>
+
   <%= form_with model: @project, local: true do |f| %>
 
     <div style="margin-bottom: 20px;">
