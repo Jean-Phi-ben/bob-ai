@@ -1,13 +1,8 @@
 class Project < ApplicationRecord
-<<<<<<< HEAD
   belongs_to :user
 
   has_many :messages, dependent: :destroy
   validates :title, presence: true
-=======
-  #RATINGS = ['carpentry', 'electricity', 'plumbing']
-    belongs_to :user
->>>>>>> 451d38750b50360cb9bfe84ca9ae8a6a003ccc67
 
 
   has_many :messages, dependent: :destroy
