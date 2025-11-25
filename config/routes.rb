@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'projects/create'
-  get 'projects/update'
-  get 'projects/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,7 +10,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:new, :create, :show, :update, :index] do
     resources :messages, only: [:create, :index]
   end
-  
+
 
 
   # Defines the root path route ("/")

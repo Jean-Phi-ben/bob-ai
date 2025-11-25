@@ -1,29 +1,3 @@
-
-<nav style="
-  width: 100%;
-  background: #111827;
-  color: white;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-">
-
-  <div style="font-size: 22px; font-weight: bold;">
-    <%= link_to "Bob AI", root_path, style: "color: white; text-decoration: none;" %>
-  </div>
-
-
-  <div style="display: flex; gap: 20px; font-size: 16px;">
-    <%= link_to "Home", root_path, style: "color: white; text-decoration: none;" %>
-    <%= link_to "New Project", new_project_path, style: "color: white; text-decoration: none;" %>
-    <% if defined?(destroy_user_session_path) %>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, style: "color: white; text-decoration: none;" %>
-    <% end %>
-  </div>
-</nav>
-
-
 <div style="max-width: 700px; margin: 50px auto;">
 
   <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 30px;">
@@ -48,8 +22,8 @@
     </div>
 
     <div style="margin-bottom: 20px;">
-      <%= f.label :category, "Category", style: "font-weight: 600;" %><br>
-      <%= f.text_field :category,
+      <%= f.select :category,
+            collection: ["Hammer", "Screwdriver", "Axe","Saw","Drill","Tape measure"],
             placeholder: "AI, Finance, Health, Gaming, etc.",
             style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
     </div>
