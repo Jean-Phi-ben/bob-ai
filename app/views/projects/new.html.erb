@@ -1,0 +1,72 @@
+
+<nav style="
+  width: 100%;
+  background: #111827;
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+">
+
+  <div style="font-size: 22px; font-weight: bold;">
+    <%= link_to "Bob AI", root_path, style: "color: white; text-decoration: none;" %>
+  </div>
+
+
+  <div style="display: flex; gap: 20px; font-size: 16px;">
+    <%= link_to "Home", root_path, style: "color: white; text-decoration: none;" %>
+    <%= link_to "New Project", new_project_path, style: "color: white; text-decoration: none;" %>
+    <% if defined?(destroy_user_session_path) %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, style: "color: white; text-decoration: none;" %>
+    <% end %>
+  </div>
+</nav>
+
+
+<div style="max-width: 700px; margin: 50px auto;">
+
+  <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 30px;">
+    Create a New Project
+  </h1>
+
+  <%= form_with model: @project, local: true do |f| %>
+
+    <div style="margin-bottom: 20px;">
+      <%= f.label :title, "Project Title", style: "font-weight: 600;" %><br>
+      <%= f.text_field :title,
+            placeholder: "Enter the project title",
+            style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <%= f.label :description, "Project Description", style: "font-weight: 600;" %><br>
+      <%= f.text_area :description,
+            rows: 5,
+            placeholder: "Describe your project...",
+            style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <%= f.label :category, "Category", style: "font-weight: 600;" %><br>
+      <%= f.text_field :category,
+            placeholder: "AI, Finance, Health, Gaming, etc.",
+            style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
+    </div>
+
+    <%= f.submit "Create Project",
+          style: "
+            background: #4F46E5;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+          " %>
+  <% end %>
+
+  <br><br>
+
+  <%= link_to "Back to Home", root_path, style: "color: #666; text-decoration: underline;" %>
+</div>
