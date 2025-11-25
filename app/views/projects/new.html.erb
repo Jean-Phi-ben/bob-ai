@@ -1,0 +1,9 @@
+<%= simple_form_for(@project) do |f| %>
+<h1>NOUVEAU PROJET</h1>
+
+
+  <%= f.input :title %>
+  <%= f.input :category, collection: ["menuiserie", "electricité", "plomberie"] %>
+  <%= f.input :prompt %>
+  <%= f.submit %>
+<% end %>
