@@ -11,21 +11,10 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <header>
-      <nav style="
-  width: 100%;
-  background: #111827;
-  color: white;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-">
-</header>
+      <%= render "shared/navbar" %>
+    </header>
+    <%= render "shared/flashes" %>
     <%= yield %>
   </body>
-  <%= render "shared/flashes" %>
-
 </html>
