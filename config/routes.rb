@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :projects, only: [:new, :create, :show, :update, :index] do
     resources :messages, only: [:create, :index]
   end
-
   
+
 
   # Defines the root path route ("/")
   # root "posts#index"
