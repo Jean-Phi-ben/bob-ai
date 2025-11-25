@@ -2,6 +2,9 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
   end
+  def index
+    @projects = Project.all
+  end
 
   def create
      @project = Project.new(project_params)
