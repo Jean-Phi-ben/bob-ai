@@ -1,16 +1,16 @@
-puts "Cleaning database..."
+
+puts "cleaning database ..."
 Project.destroy_all
 User.destroy_all
 
-puts "Creating users..."
+puts "create a new user ...."
 henry = User.create!(
   first_name: "Henry",
-  last_name: "Thiery",
+  last_name: "Thierry",
   email: "henry@mail.com",
   password: "secret",
 )
 
-puts "Creating projects..."
 methodology = <<~METHODO
   Cut the wood boards to the desired dimensions for the tabletop and legs.
 
@@ -34,6 +34,16 @@ methodology = <<~METHODO
 
   METHODO
 
+project_1 = Project.create!(
+  title: "bedside table",
+  category: "Carpentry",
+  status: "ongoing",
+  tools: ["Hammer", "Screwdriver", "Axe","Saw","Tape measure"],
+  materials: ["Screw","Nail","Plywood","Washers","Anchors","Varnish","Pipes"],
+  methodology: methodology,
+  user: henry,
+  created_at: "2025-11-01",
+)
 project_2 = Project.create!(
   title: "Installing light on a load-bearing wall.",
   category: "Electricity",
@@ -55,4 +65,37 @@ project_3 = Project.create!(
   created_at: "2024-03-11",
 )
 
+project_4 = Project.create!(
+  title: "rainwater harvesting",
+  category: "Plumbing",
+  status: "finished",
+  tools: ["Hammer", "Screwdriver", "Axe","Saw","Tape measure"],
+  materials: ["Screw","Nail","Plywood","Washers","Anchors","Varnish","Pipes"],
+  methodology: methodology,
+  user: henry,
+  created_at: "2024-03-12",
+)
+
+project_5 = Project.create!(
+  title: "garden light path",
+  category: "Electricity",
+  status: "finished",
+  tools: ["Hammer", "Screwdriver", "Axe","Saw","Tape measure"],
+  materials: ["Screw","Nail","Plywood","Washers","Anchors","Varnish","Pipes"],
+  methodology: methodology,
+  user: henry,
+  created_at: "2025-06-12",
+  )
+
+project_6 = Project.create!(
+  title: "bar counter",
+  category: "Carpentry",
+  status: "finished",
+  tools: ["Hammer", "Screwdriver", "Axe","Saw","Tape measure"],
+  materials: ["Screw","Nail","Plywood","Washers","Anchors","Varnish","Pipes"],
+  methodology: methodology,
+  user: henry,
+  created_at: "2023-02-29",
+  )
 puts "Finished!"
+
