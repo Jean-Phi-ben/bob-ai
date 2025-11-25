@@ -4,31 +4,24 @@
     Create a New Project
   </h1>
 
-  <%= form_with model: @project, local: true do |f| %>
+<%= simple_form_for(@project) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :category, collection: ["Carpentry", "Electricity", "Plumbing"] %>
 
-    <div style="margin-bottom: 20px;">
-      <%= f.label :title, "Project Title", style: "font-weight: 600;" %><br>
-      <%= f.text_field :title,
-            placeholder: "Enter the project title",
-            style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
-    </div>
+  <%= f.input :materials,
+    collection: ["Screw", "Nail", "Plywood", "Washers", "Anchors", "Varnish", "Pipes", "Gaskets", "Wires", "Switches", "Outlets", "Light", "Cables"],
+    as: :select,
+    include_blank: true,
+    input_html: {
+      multiple: true,
+      class: "form-select",
+      size: 8,
+      data: { placeholder: "Sélectionne les matériaux..." }
+    }
+%>
+  <%= f.input :prompt, label:"Description de ton projet" %>
 
-    <div style="margin-bottom: 20px;">
-      <%= f.label :description, "Project Description", style: "font-weight: 600;" %><br>
-      <%= f.text_area :description,
-            rows: 5,
-            placeholder: "Describe your project...",
-            style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
-    </div>
-
-    <div style="margin-bottom: 20px;">
-      <%= f.select :category,
-            collection: ["Hammer", "Screwdriver", "Axe","Saw","Drill","Tape measure"],
-            placeholder: "AI, Finance, Health, Gaming, etc.",
-            style: "width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" %>
-    </div>
-
-    <%= f.submit "Create Project",
+<%= f.submit "Create Project",
           style: "
             background: #4F46E5;
             color: white;
@@ -38,7 +31,7 @@
             border-radius: 8px;
             cursor: pointer;
           " %>
-  <% end %>
+<% end %>
 
   <br><br>
 
