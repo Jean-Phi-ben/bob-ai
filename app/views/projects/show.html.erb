@@ -1,0 +1,35 @@
+<h1><%= @project.title %></h1>
+<p><%= @project.description %></p>
+
+<hr>
+
+<h2>Messages</h2>
+
+<% if @project.messages.any? %>
+  <% @project.messages.each do |m| %>
+    <p>
+      <strong><%= m.created_at.strftime("%H:%M") %>:</strong>
+      <%= m.content %>
+    </p>
+  <% end %>
+<% else %>
+  <p>No messages yet.</p>
+<% end %>
+
+<hr>
+
+<h3>Add a new message</h3>
+
+<%= form_with model: [@project, Message.new], local: true do |f| %>
+  <div>
+    <%= f.text_area :content, rows: 3, placeholder: "Write your message..." %>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <%= f.submit "Send", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<hr>
+
+<%= link_to "Back", projects_path, class: "btn btn-secondary" %>

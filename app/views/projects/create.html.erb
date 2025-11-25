@@ -1,0 +1,31 @@
+<h1>Project Created Successfully 🎉</h1>
+
+<p>Your project has been saved. Here are the details:</p>
+
+<ul>
+  <li><strong>Title:</strong> <%= @project.title %></li>
+  <li><strong>Description:</strong> <%= @project.description %></li>
+  <li><strong>Category:</strong> <%= @project.category %></li>
+  <li><strong>Created by:</strong> <%= @project.user.email %></li>
+</ul>
+
+<br>
+
+<%= link_to "View Project", project_path(@project),
+      style: "
+        padding: 10px 20px;
+        background: #4F46E5;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+      " %>
+
+<br><br>
+
+<%= link_to "Create Another Project", new_project_path,
+      style: "color: #4F46E5; font-weight: bold;" %>
+
+<br><br>
+
+<%= link_to "Back to Home", root_path %>
