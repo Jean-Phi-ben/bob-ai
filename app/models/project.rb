@@ -28,9 +28,9 @@ class Project < ApplicationRecord
 
   def tools_are_valid
     return if tools.blank?
-    invalid = tools - CATEGORIES
+    invalid = tools - TOOLS
     if invalid.any?
-      errors.add(:categories, "contient des valeurs invalides: #{invalid.join(', ')}")
+      errors.add(:tools, "contient des valeurs invalides: #{invalid.join(', ')}")
     end
   end
 
