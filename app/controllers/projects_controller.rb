@@ -8,20 +8,18 @@ class ProjectsController < ApplicationController
   end
 
   def create
-
-@project = Project.new(project_params)
+    @project = Project.new(project_params)
     @project.user = current_user
-      if @project.save
-      #TODO: on appelle l'IA avec le prompt du user
-      redirect_to project_messages_path(@project), notice: "Project created successfully."
+    if @project.save
+    #TODO: on appelle l'IA avec le prompt du user
+    redirect_to project_messages_path(@project), notice: "Project created successfully."
 
-      else
-    render :new, status: :unprocessable_entity
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    raise
     @project = Project.find(params[:id])
   end
 

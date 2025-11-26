@@ -1,5 +1,4 @@
 class Project < ApplicationRecord
-  RATINGS = ["Carpentry", "Electricity", "Plumbing"]
   belongs_to :user
 
   has_many :messages, dependent: :destroy
