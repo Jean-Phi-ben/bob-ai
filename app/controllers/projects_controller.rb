@@ -10,16 +10,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-<<<<<<< HEAD
-    @project = Project.new(project_params)
-    if @project.save!
-      raise
-      render :create
-    else
-      render :new, status: :unprocessable_entity
-=======
-     @project = Project.new(project_params)
-     @project.user = current_user
+
+@project = Project.new(project_params)
+    @project.user = current_user
       if @project.save
       #TODO: on appelle l'IA avec le prompt du user
       redirect_to project_messages_path(@project), notice: "Project created successfully."
