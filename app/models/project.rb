@@ -4,7 +4,6 @@ class Project < ApplicationRecord
   has_many :messages, dependent: :destroy
   validates :title, presence: true
 
-
   STATUSES   = ["ongoing", "finished"].freeze
   CATEGORIES = ["Carpentry", "Electricity", "Plumbing"].freeze
   TOOLS      = ["Hammer", "Screwdriver", "Axe", "Saw", "Drill", "Tape measure"].freeze
@@ -49,24 +48,4 @@ class Project < ApplicationRecord
     if invalid.any?
       errors.add(:materials, "contient des valeurs invalides: #{invalid.join(', ')}")
     end
-  end
->>>>>>> 81f5f40cfa6366b2568ab358b0fbbba80dd7ac8d
 end
-
-
-
-
-
-#class Project < ApplicationRecord
-  #RATINGS = ['carpentry', 'electricity', 'plumbing']
-    #belongs_to :user
-
-
-  #has_many :messages, dependent: :destroy
-  #validates :title, presence: true
-  #validates :status, inclusion: { in: ["ongoing", "finished",]}
-  #validates :category, collection: { in: ["Carpentry", "Electricity", "Plumbing"]}
-  #validates :tools, inclusion: { in: ["Hammer", "Screwdriver", "Axe","Saw","Drill","Tape measure"]}
-  #validates :materials, inclusion: { in: ["Screw","Nail","Plywood","Washers","Anchors","Varnish","Pipes","Gaskets","Wires","Switches","Outlets","Light", "Cables"]}
-
-#end

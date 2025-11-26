@@ -1,8 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
   def new
     @project = Project.new
-    @project.user = current_user
   end
 
   def index
@@ -10,6 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
+ index_css
 
 @project = Project.new(project_params)
     @project.user = current_user
@@ -19,11 +18,12 @@ class ProjectsController < ApplicationController
 
       else
     render :new, status: :unprocessable_entity
->>>>>>> 81f5f40cfa6366b2568ab358b0fbbba80dd7ac8d
     end
   end
 
   def show
+    raise
+    @project = Project.find(params[:id])
   end
 
   def update
@@ -35,13 +35,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(
-      :title,
-      :category,
-      :status,
-      :prompt,
-      tools: [],      # 👈 array
-      materials: []
-    )
+    params.require(:project).permit(:title, :category, :status, :tools, :materials, :methodology, :prompt)
   end
 end
