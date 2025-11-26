@@ -1,90 +1,31 @@
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8 col-md-10">
-      <div class="card shadow-sm border-0">
-        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-          <div>
-            <h4 class="mb-0">
-              🎉 Project created successfully
-            </h4>
-            <small class="d-block">
-              Created by <strong><%= @project.user.email %></strong>
-              · <%= l(@project.created_at, format: :short) rescue @project.created_at.to_s %>
-            </small>
-          </div>
-          <span class="badge bg-light text-success text-uppercase">
-            <%= @project.status.presence || "Draft" %>
-          </span>
-        </div>
+<h1>Project Created Successfully 🎉</h1>
 
-        <div class="card-body">
-          <h5 class="card-title mb-3">
-            <%= @project.title %>
-          </h5>
+<p>Your project has been saved. Here are the details:</p>
 
-          <% if @project.description.present? %>
-            <p class="card-text text-muted">
-              <%= @project.description %>
-            </p>
-          <% end %>
+<ul>
+  <li><strong>Title:</strong> <%= @project.title %></li>
+  <li><strong>Description:</strong> <%= @project.description %></li>
+  <li><strong>Category:</strong> <%= @project.category %></li>
+  <li><strong>Created by:</strong> <%= @project.user.email %></li>
+</ul>
 
-          <dl class="row mb-0">
-            <dt class="col-sm-3">Category</dt>
-            <dd class="col-sm-9">
-              <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis px-3 py-2 rounded-pill">
-                <%= @project.category.presence || "Not specified" %>
-              </span>
-            </dd>
+<br>
 
-            <% if @project.tools.present? %>
-              <dt class="col-sm-3 mt-3">Tools</dt>
-              <dd class="col-sm-9 mt-3">
-                <% Array(@project.tools).each do |tool| %>
-                  <span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis me-1 mb-1">
-                    <%= tool %>
-                  </span>
-                <% end %>
-              </dd>
-            <% end %>
+<%= link_to "View Project", project_path(@project),
+      style: "
+        padding: 10px 20px;
+        background: #4F46E5;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+      " %>
 
-            <% if @project.materials.present? %>
-              <dt class="col-sm-3 mt-3">Materials</dt>
-              <dd class="col-sm-9 mt-3">
-                <% Array(@project.materials).each do |material| %>
-                  <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis me-1 mb-1">
-                    <%= material %>
-                  </span>
-                <% end %>
-              </dd>
-            <% end %>
+<br><br>
 
-            <% if @project.respond_to?(:processus) && @project.processus.present? %>
-              <dt class="col-sm-3 mt-3">Process</dt>
-              <dd class="col-sm-9 mt-3">
-                <ol class="mb-0 ps-3">
-                  <% Array(@project.processus).each do |step| %>
-                    <li class="mb-1"><%= step %></li>
-                  <% end %>
-                </ol>
-              </dd>
-            <% end %>
-          </dl>
-        </div>
+<%= link_to "Create Another Project", new_project_path,
+      style: "color: #4F46E5; font-weight: bold;" %>
 
-        <div class="card-footer bg-white d-flex flex-wrap gap-2 justify-content-between">
-          <div class="d-flex flex-wrap gap-2">
-            <%= link_to "View project", project_path(@project),
-                class: "btn btn-primary" %>
+<br><br>
 
-            <%= link_to "Create another project", new_project_path,
-                class: "btn btn-outline-primary" %>
-          </div>
-
-          <%= link_to "Back to home", root_path,
-              class: "btn btn-link text-muted p-0 align-self-center" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+<%= link_to "Back to Home", root_path %>

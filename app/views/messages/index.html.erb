@@ -4,16 +4,25 @@
 
 <h2>Messages</h2>
 
-<% if @project.messages.any? %>
-  <% @project.messages.each do |m| %>
-    <p>
-      <strong><%= m.created_at.strftime("%H:%M") %>:</strong>
-      <%= m.content %>
-    </p>
+<div id="messages">
+  <% @project.messages.each do |message| %>
+    <% if message.role == "user" %>
+      <div class="d-flex justify-content-end mb-2">
+        <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
+          <%= raw(render_markdown(message.content)) %>
+        </div>
+      </div>
+
+    <% elsif message.role == "assistant" %>
+      <div class="d-flex justify-content-start mb-5">
+        <div class="px-3 pb-0 pt-3">
+          <%= raw(render_markdown(message.content)) %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-<% else %>
-  <p>No messages yet.</p>
-<% end %>
+</div>
+
 
 <hr>
 
@@ -32,3 +41,8 @@
 <hr>
 
 <%= link_to "Back", projects_path, class: "btn btn-secondary" %>
+
+
+<%= @messages.each do |message|  %>
+<%= message %>
+<% end %>
