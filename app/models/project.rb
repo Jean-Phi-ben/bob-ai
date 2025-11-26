@@ -50,7 +50,6 @@ class Project < ApplicationRecord
       errors.add(:materials, "contient des valeurs invalides: #{invalid.join(', ')}")
     end
   end
->>>>>>> 81f5f40cfa6366b2568ab358b0fbbba80dd7ac8d
 end
 
 
