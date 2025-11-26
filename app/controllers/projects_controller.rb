@@ -2,18 +2,19 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
   end
+
   def index
     @projects = Project.all
   end
 
   def create
-  @project = Project.new(project_params)
-  if @project.save!
-    raise
-    render :create
-  else
-    render :new, status: :unprocessable_entity
-  end
+    @project = Project.new(project_params)
+    if @project.save!
+      raise
+      render :create
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -32,6 +33,4 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:title, :category, :status, :tools, :materials, :methodology, :prompt)
   end
-
-
 end
