@@ -8,7 +8,6 @@ class ProjectsController < ApplicationController
   end
 
   def create
- index_css
 
 @project = Project.new(project_params)
     @project.user = current_user

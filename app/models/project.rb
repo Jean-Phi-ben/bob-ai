@@ -49,4 +49,5 @@ class Project < ApplicationRecord
     if invalid.any?
       errors.add(:materials, "contient des valeurs invalides: #{invalid.join(', ')}")
     end
+  end
 end
