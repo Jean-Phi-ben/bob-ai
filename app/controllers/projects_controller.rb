@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
     if @project.save
     #TODO: on appelle l'IA avec le prompt du user
     redirect_to project_messages_path(@project), notice: "Project created successfully."
-
     else
       render :new, status: :unprocessable_entity
     end
