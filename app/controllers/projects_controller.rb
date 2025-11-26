@@ -1,26 +1,27 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
   def new
     @project = Project.new
-    @project.user = current_user
   end
+
   def index
-    @projects = Project.all
+    @ongoing_projects  = current_user.projects.where(status: "ongoing")
+    @finished_projects = current_user.projects.where(status: "finished")
   end
 
   def create
-     @project = Project.new(project_params)
-     @project.user = current_user
-      if @project.save
-      #TODO: on appelle l'IA avec le prompt du user
-      redirect_to project_messages_path(@project), notice: "Project created successfully."
+    @project = Project.new(project_params)
+    @project.user = current_user
+    @project
 
-      else
-    render :new, status: :unprocessable_entity
+    if @project.save
+      redirect_to project_messages_path(@project), notice: "Project created successfully."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
+    @project = Project.find(params[:id])
   end
 
   def update

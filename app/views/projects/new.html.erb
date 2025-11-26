@@ -4,9 +4,12 @@
     Create a New Project
   </h1>
 
+
 <%= simple_form_for(@project) do |f| %>
   <%= f.input :title %>
   <%= f.input :category, collection: ["Carpentry", "Electricity", "Plumbing"] %>
+
+
 
   <%= f.input :materials,
     collection: ["Screw", "Nail", "Plywood", "Washers", "Anchors", "Varnish", "Pipes", "Gaskets", "Wires", "Switches", "Outlets", "Light", "Cables"],
