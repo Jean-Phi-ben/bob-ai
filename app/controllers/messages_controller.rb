@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
   def index
-    @messages = Message.all.order(:created_at)
+    @project = current_user.projects.find(params[:project_id])
     @message = Message.new
+    @messages = @project.messages.order(:created_at)
   end
 
   def create

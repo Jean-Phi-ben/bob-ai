@@ -3,7 +3,7 @@ class CreateProjects < ActiveRecord::Migration[7.1]
     create_table :projects do |t|
       t.string :title
       t.string :category
-      t.string :status
+      t.string :status, default: "ongoing"
       t.string :tools, array: true
       t.string :materials, array: true
       t.text :methodology
