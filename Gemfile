@@ -76,3 +76,10 @@ group :test do
 end
 
 gem "devise"
+
+gem "openai", "~> 0.36.1"
+
+gem "ruby-openai"
+gem "kramdown"
+gem "rouge"
+gem "kramdown-parser-gfm"

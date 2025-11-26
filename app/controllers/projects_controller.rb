@@ -4,15 +4,17 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @ongoing_projects  = current_user.projects.where(status: "ongoing")
+    @finished_projects = current_user.projects.where(status: "finished")
   end
 
   def create
     @project = Project.new(project_params)
     @project.user = current_user
+    @project
+
     if @project.save
-    #TODO: on appelle l'IA avec le prompt du user
-    redirect_to project_messages_path(@project), notice: "Project created successfully."
+      redirect_to project_messages_path(@project), notice: "Project created successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,6 +33,13 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :category, :status, :tools, :materials, :methodology, :prompt)
+    params.require(:project).permit(
+      :title,
+      :category,
+      :status,
+      :prompt,
+      tools: [],      # 👈 array
+      materials: []
+    )
   end
 end
