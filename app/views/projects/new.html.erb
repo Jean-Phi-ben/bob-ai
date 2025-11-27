@@ -1,42 +1,120 @@
-<div style="max-width: 700px; margin: 50px auto;">
+<!-- VANTA BACKGROUND -->
+<div id="vanta-bg" style="position: fixed; inset: 0; z-index: -1;"></div>
 
-  <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 30px;">
-    Create a New Project
-  </h1>
+<!-- DARK OVERLAY -->
+<div style="
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(15,23,42,0.4), rgba(15,23,42,0.9));
+  z-index: 0;
+"></div>
 
 
-<%= simple_form_for(@project) do |f| %>
-  <%= f.input :title %>
-  <%= f.input :category, collection: ["Carpentry", "Electricity", "Plumbing"] %>
+<!-- TEXT + FORM WRAPPER -->
+<div class="create-wrapper" style="
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px 60px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+">
+  <div class="create-card" style="
+    width: 100%;
+    max-width: 680px;
+    background: rgba(15,23,42,0.92);
+    border-radius: 18px;
+    padding: 28px 26px 30px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.75);
+    border: 1px solid rgba(148,163,184,0.45);
+    backdrop-filter: blur(12px);
+    color: #E5E7EB;
+  ">
 
+    <h1 class="create-title" style="
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #F9FAFB;
+    ">
+      Create a new project
+    </h1>
 
+    <p class="create-subtitle" style="
+      font-size: 14px;
+      color: #CBD5E1;
+      margin-bottom: 24px;
+    ">
+      Describe your project and select the right tools and materials.
+    </p>
 
-  <%= f.input :materials,
-    collection: ["Screw", "Nail", "Plywood", "Washers", "Anchors", "Varnish", "Pipes", "Gaskets", "Wires", "Switches", "Outlets", "Light", "Cables"],
-    as: :select,
-    include_blank: true,
-    input_html: {
-      multiple: true,
-      class: "form-select",
-      size: 8,
-      data: { placeholder: "Sélectionne les matériaux..." }
-    }
-%>
-  <%= f.input :prompt, label:"Description de ton projet" %>
+    <%= form_with model: @project, local: true, class: "create-form" do |f| %>
 
-<%= f.submit "Create Project",
-          style: "
-            background: #4F46E5;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 18px;
-            border-radius: 8px;
-            cursor: pointer;
-          " %>
-<% end %>
+      <!-- Title -->
+      <div class="field" style="margin-bottom: 18px;">
+        <%= f.label :title, "Project title", class: "field-label", style: "display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #E2E8F0;" %>
+        <%= f.text_field :title,
+              placeholder: "Ex: Repair kitchen cabinet, install lighting...",
+              class: "input",
+              style: "
+                width: 100%;
+                background: rgba(2,6,23,0.85);
+                border: 1px solid #475569;
+                border-radius: 10px;
+                padding: 10px 12px;
+                font-size: 14px;
+                color: #E5E7EB;
+                outline: none;
+              " %>
+      </div>
 
-  <br><br>
+      <!-- Description -->
+      <div class="field" style="margin-bottom: 18px;">
+        <%= f.label :prompt, "Description", class: "field-label", style: "display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #E2E8F0;" %>
+        <%= f.text_area :prompt,
+              rows: 4,
+              placeholder: "What do you want to build, repair or install?",
+              class: "textarea",
+              style: "
+                width: 100%;
+                background: rgba(2,6,23,0.85);
+                border: 1px solid #475569;
+                border-radius: 10px;
+                padding: 10px 12px;
+                font-size: 14px;
+                color: #E5E7EB;
+                outline: none;
+                resize: vertical;
+              " %>
+      </div>
 
-  <%= link_to "Back to Home", root_path, style: "color: #666; text-decoration: underline;" %>
+    <% end %>
+
+  </div>
 </div>
+
+<!-- VANTA TRUNK SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.VANTA) {
+      window.VANTA.TRUNK({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        spacing: 2.50,
+        chaos: 6.50,
+        color: 0x4f46e5,
+        backgroundColor: 0x020617
+      });
+    }
+  });
+</script>

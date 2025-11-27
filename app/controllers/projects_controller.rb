@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-    @project
 
     if @project.save
       redirect_to project_messages_path(@project), notice: "Project created successfully."
@@ -26,8 +25,11 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    @project.update(project_params)
-    redirect_to project_path(@project)
+    if @project.update(project_params)
+      redirect_to project_path(@project)
+    else
+      render :show, status: :unprocessable_entity
+    end
   end
 
   private
@@ -38,7 +40,7 @@ class ProjectsController < ApplicationController
       :category,
       :status,
       :prompt,
-      tools: [],      # 👈 array
+      tools: [],      # arrays
       materials: []
     )
   end

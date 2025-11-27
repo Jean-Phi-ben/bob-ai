@@ -1,18 +1,109 @@
-<h1>Pages#home</h1>
+<!-- Background Vanta -->
+<div id="vanta-bg" style="position: fixed; inset: 0; z-index: -1;"></div>
 
-<div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-  <%= link_to "Create a Project", new_project_path,
-    style: "
-      padding: 20px 40px;
-      background: #4F46E5;
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    "
-  %>
+<!-- Dark overlay for better contrast -->
+<div style="
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(15,23,42,0.4), rgba(15,23,42,0.9));
+  z-index: 0;
+">
 </div>
 
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- Page content -->
+<div style="
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+">
+
+  <!-- Glassmorphism card -->
+  <div style="
+    max-width: 600px;
+    width: 100%;
+    padding: 32px 28px;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.75);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(148,163,184,0.4);
+    backdrop-filter: blur(10px);
+    text-align: center;
+  ">
+    <p style="
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9CA3AF;
+      margin-bottom: 10px;
+    ">
+      Bob AI • Project Assistant
+    </p>
+
+    <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">
+      Your smart workspace for DIY projects
+    </h1>
+
+    <p style="font-size: 15px; color: #E5E7EB; margin-bottom: 24px; line-height: 1.5;">
+      Create, organize and follow your carpentry, electricity and plumbing projects.
+      Keep track of tools, materials and status with a clear, AI-ready structure.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+      <%= link_to "Create a project", new_project_path,
+            style: "
+              padding: 12px 26px;
+              background: #4F46E5;
+              color: white;
+              text-decoration: none;
+              border-radius: 999px;
+              font-size: 15px;
+              font-weight: 600;
+              box-shadow: 0 10px 25px rgba(79,70,229,0.7);
+              display: inline-block;
+            " %>
+
+      <%= link_to "View your projects", projects_path,
+            style: "
+              padding: 12px 22px;
+              background: transparent;
+              color: #E5E7EB;
+              text-decoration: none;
+              border-radius: 999px;
+              font-size: 15px;
+              border: 1px solid rgba(148,163,184,0.7);
+              display: inline-block;
+            " %>
+    </div>
+
+    <p style="font-size: 12px; color: #9CA3AF; margin-top: 4px;">
+      Tip: start by adding the project type, tools and materials you’ll use.
+    </p>
+  </div>
+</div>
+
+<!-- VANTA SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.VANTA) {
+      window.VANTA.NET({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        points: 20.00
+      });
+    }
+  });
+</script>

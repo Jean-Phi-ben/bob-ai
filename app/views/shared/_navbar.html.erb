@@ -1,27 +1,40 @@
+<!-- NAVBAR -->
 <nav style="
+  position: relative;
+  z-index: 2;
   width: 100%;
-  background: #131329ff;
+  background: rgba(15, 23, 42, 0.9);
   color: white;
   padding: 15px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 ">
-
+  <!-- Logo -->
   <div style="font-size: 22px; font-weight: bold;">
     <%= link_to "Bob AI", root_path, style: "color: white; text-decoration: none;" %>
   </div>
 
+  <!-- Links -->
+  <div style="display: flex; gap: 20px; font-size: 15px; align-items: center;">
+    <%= link_to "Home", root_path, style: "color: white; text-decoration: none;" %>
+    <%= link_to "My projects", projects_path, style: "color: white; text-decoration: none;" %>
+    <%= link_to "New project", new_project_path, style: "color: white; text-decoration: none;" %>
 
-  <div style="display: flex; gap: 20px; font-size: 16px;">
-    <% if user_signed_in? %>
-
-      <%= link_to "My projects", projects_path, style: "color: white; text-decoration: none;" %>
-      <%= link_to "New Project", new_project_path, style: "color: white; text-decoration: none;" %>
-      <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, style: "color: white; text-decoration: none;" %>
-    <% else %>
-      <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+    <% if defined?(user_signed_in?) && user_signed_in? && defined?(destroy_user_session_path) %>
+      <%= button_to "Logout",
+            destroy_user_session_path,
+            method: :delete,
+            style: "
+              background: transparent;
+              border: 1px solid rgba(248,250,252,0.6);
+              border-radius: 999px;
+              padding: 6px 14px;
+              color: white;
+              cursor: pointer;
+              font-size: 14px;
+            " %>
     <% end %>
-
   </div>
 </nav>
