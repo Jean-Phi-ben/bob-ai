@@ -37,7 +37,6 @@ class MessagesController < ApplicationController
     end
   end
 
-
   private
 
   def set_project
@@ -62,51 +61,14 @@ def build_conversation_messages
       {
         role: "system",
         content:
-"Tu es un assistant qui aide l'utilisateur sur son projet de bricolage ou de travaux.
-Avant de proposer une solution, commence toujours par poser une premioère question sur le type de matériaux qu'il veut utiliser,
-une deuxième sur les outils qu'il à a disposition et donne la méthodologie,
-sauf si l'utilisateur a déjà fourni tout ce qu'il faut.
-Tes questions doivent être concrètes, utiles et directement liées au projet.
-Si la demande est incomplète ou ambiguë, commence toujours par demander des précisions.
-Termine en 5 étapes max"
+"You are an assistant who helps the user with their DIY or renovation project.
+Before providing a solution, always begin by asking a first question about the type of materials they want to use,
+and a second question about the tools they have available. Then provide the methodology,
+unless the user has already provided everything you need.
+Your questions must be concrete, useful, and directly related to the project.
+If the request is incomplete or ambiguous, always start by asking for clarification.
+Finish in no more than 5 steps."
       }
     ] + history
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class MessagesController < ApplicationController
-#   def index
-#     @project = current_user.projects.find(params[:project_id])
-#     @message = Message.new
-#     @messages = @project.messages.order(:created_at)
-#   end
-
-#   def create
-#     @message = Message.new(message_params)
-#     @message.user = current_user
-#     @message.save
-#     redirect_to messages_path
-#   end
-
-#   private
-
-#   def message_params
-#     params.require(:message).permit(:content)
-#   end
-# end
