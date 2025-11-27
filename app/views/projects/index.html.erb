@@ -1,7 +1,6 @@
 <div class="container d-flex justify-content-end mt-2">
   <%= link_to "Start a new project", new_project_path, class: "btn btn-primary" %>
 </div>
-
 <style>
   #carrousselongoing .carousel-item,
   #carrousselfinalized .carousel-item {
@@ -9,7 +8,6 @@
     position: relative;
     text-align: center;
   }
-
   #carrousselongoing img,
   #carrousselfinalized img {
     max-height: 100%;
@@ -18,7 +16,6 @@
     display: block;
   }
 </style>
-
 <style>
   .section-title {
     text-align: center;
@@ -30,19 +27,15 @@
   }
 </style>
 
-<%# projets en cours  %>
 <h2 class="section-title">Ongoing projects</h2>
 <br>
-
 <div id="carrousselongoing" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carrousselongoing" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carrousselongoing" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carrousselongoing" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-
   <div class="carousel-inner">
-
     <div class="carousel-item active">
       <%= image_tag "table-de-chevet.jpg", alt: "Bedside table", width: 300 %>
       <div class="carousel-caption d-none d-md-block">
@@ -50,7 +43,6 @@
         <p>Here is your bedside project</p>
       </div>
     </div>
-
     <div class="carousel-item">
       <%= image_tag "lumiere.jpg", alt: "Installing light", width: 300 %>
       <div class="carousel-caption d-none d-md-block">
@@ -58,7 +50,6 @@
         <p>Light wall</p>
       </div>
     </div>
-
     <div class="carousel-item">
       <%= image_tag "Ackerman_farmer.jpg", alt: "Rocking chair", width: 300 %>
       <div class="carousel-caption d-none d-md-block">
@@ -66,37 +57,28 @@
         <p>Your chair for your Grandma</p>
       </div>
     </div>
-
   </div>
-
   <button class="carousel-control-prev" type="button" data-bs-target="#carrousselongoing" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-
   <button class="carousel-control-next" type="button" data-bs-target="#carrousselongoing" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-
 </div>
-
 <br>
 <br>
-
 <%# projets terminés  %>
 <h2 class="section-title">Finalized project</h2>
 <br>
-
 <div id="carrousselfinalized" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carrousselfinalized" data-bs-slide-to="0" class="active"></button>
     <button type="button" data-bs-target="#carrousselfinalized" data-bs-slide-to="1"></button>
     <button type="button" data-bs-target="#carrousselfinalized" data-bs-slide-to="2"></button>
   </div>
-
   <div class="carousel-inner">
-
     <div class="carousel-item active">
       <%= image_tag "rainwater.jpg", width: 300 %>
       <div class="carousel-caption d-none d-md-block">
@@ -104,7 +86,6 @@
         <p>If you want to keep some water for your plants</p>
       </div>
     </div>
-
     <div class="carousel-item">
       <%= image_tag "garden light.jpeg", width: 300 %>
       <div class="carousel-caption d-none d-md-block">
@@ -112,7 +93,6 @@
         <p>Because you're shiny</p>
       </div>
     </div>
-
     <div class="carousel-item">
       <%= image_tag "bar.jpeg", width: 300 %>
       <div class="carousel-caption d-none d-md-block">
@@ -120,14 +100,11 @@
         <p>Keep your whisky safe</p>
       </div>
     </div>
-
   </div>
-
   <button class="carousel-control-prev" type="button" data-bs-target="#carrousselfinalized" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-
   <button class="carousel-control-next" type="button" data-bs-target="#carrousselfinalized" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
     <span class="visually-hidden">Next</span>
