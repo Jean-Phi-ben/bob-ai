@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def index
     @messages = @project.messages.order(:created_at)
-    puts @messages
+    # puts @messages
     #@messages.user = current_user
   end
 
@@ -22,9 +22,11 @@ class MessagesController < ApplicationController
           messages: build_conversation_messages
         }
       )
-      binding.pry
 
       ai_output = response.dig("choices", 0, "message", "content") || "Je n'ai pas réussi à répondre."
+      if ai_output.start_with?("```json")
+        ai_output.gsub!("```json", "").gsub!("```", "")
+      end
       parsed_response = JSON.parse(ai_output)
 
       @project.update(
@@ -34,7 +36,7 @@ class MessagesController < ApplicationController
       )
 
       @project.messages.create!(
-        content: parsed_response["messages"],
+        content: parsed_response["message"],
         role: "assistant"
       )
 
@@ -75,13 +77,21 @@ def build_conversation_messages
           Your questions must be concrete, useful, and directly related to the project.
           If the request is incomplete or ambiguous, always start by asking for clarification.
           Finish in no more than 5 steps.
-          Answer format should be a JSON with the following keys :
+
+          # ANSWER FORMAT
+          Answer format should always be a JSON with the following keys :
           - tools with the list of tools in markdown syntaxe - do not use an array,
           - materials with the list of materials in markdown syntaxe - do not use an array,
           - methodology with the whole methodology in markdown syntaxe - do not use an array,
-          - message with the whole message that can be displayed in the chatroom with our user. It includes tools, materials and methodology.
+          - message with the whole message that can be displayed in the chatroom with our user.
           Be consistent in the json."
       }
-    ] + history
+    ] + history + [ { role: "system", content: "# ANSWER FORMAT
+          Answer format should always be a JSON with the following keys :
+          - tools with the list of tools in markdown syntaxe - do not use an array,
+          - materials with the list of materials in markdown syntaxe - do not use an array,
+          - methodology with the whole methodology in markdown syntaxe - do not use an array,
+          - message with the whole message that can be displayed in the chatroom with our user.
+          Be consistent in the json."}]
   end
 end
