@@ -84,7 +84,7 @@ def build_conversation_messages
           - tools with the list of tools in markdown syntaxe - do not use an array,
           - materials with the list of materials in markdown syntaxe - do not use an array,
           - methodology with the whole methodology in markdown syntaxe - do not use an array,
-          - message with the whole message that can be displayed in the chatroom with our user.
+          - message with the whole message that can be displayed in the chatroom with our user, in markdown syntaxe.
           Be consistent in the json."
       }
     ] + history + [ { role: "system", content: "# ANSWER FORMAT
@@ -92,7 +92,7 @@ def build_conversation_messages
           - tools with the list of tools in markdown syntaxe - do not use an array,
           - materials with the list of materials in markdown syntaxe - do not use an array,
           - methodology with the whole methodology in markdown syntaxe - do not use an array,
-          - message with the whole message that can be displayed in the chatroom with our user.
+          - message with the whole message that can be displayed in the chatroom with our user, in markdown syntaxe.
           Be consistent in the json."}]
   end
 end
