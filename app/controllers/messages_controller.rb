@@ -48,10 +48,10 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:content)
   end
 
-  def build_conversation_messages
+def build_conversation_messages
     history = @project.messages.order(:created_at).map do |msg|
       {
-        role: msg.role == "ai" ? "assistant" : "user",
+        role: msg.role == "assistant" ? "assistant" : "user",
         content: msg.content
       }
     end
@@ -59,7 +59,17 @@ class MessagesController < ApplicationController
     history << { role: "user", content: @message.content }
 
     [
-      { role: "system", content: "Tu es un assistant qui aide l'utilisateur sur son projet de bricolage / travaux." }
+      {
+        role: "system",
+        content:
+"Tu es un assistant qui aide l'utilisateur sur son projet de bricolage ou de travaux.
+Avant de proposer une solution, commence toujours par poser une premioère question sur le type de matériaux qu'il veut utiliser,
+une deuxième sur les outils qu'il à a disposition et donne la méthodologie,
+sauf si l'utilisateur a déjà fourni tout ce qu'il faut.
+Tes questions doivent être concrètes, utiles et directement liées au projet.
+Si la demande est incomplète ou ambiguë, commence toujours par demander des précisions.
+Termine en 5 étapes max"
+      }
     ] + history
   end
 end
