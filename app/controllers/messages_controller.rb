@@ -22,11 +22,19 @@ class MessagesController < ApplicationController
           messages: build_conversation_messages
         }
       )
+      binding.pry
 
       ai_output = response.dig("choices", 0, "message", "content") || "Je n'ai pas réussi à répondre."
+      parsed_response = JSON.parse(ai_output)
+
+      @project.update(
+        tools: parsed_response["tools"],
+        materials: parsed_response["materials"],
+        methodology: parsed_response["methodology"],
+      )
 
       @project.messages.create!(
-        content: ai_output,
+        content: parsed_response["messages"],
         role: "assistant"
       )
 
@@ -36,7 +44,6 @@ class MessagesController < ApplicationController
       render :index, status: :unprocessable_entity
     end
   end
-
 
   private
 
@@ -48,10 +55,10 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:content)
   end
 
-  def build_conversation_messages
+def build_conversation_messages
     history = @project.messages.order(:created_at).map do |msg|
       {
-        role: msg.role == "ai" ? "assistant" : "user",
+        role: msg.role == "assistant" ? "assistant" : "user",
         content: msg.content
       }
     end
@@ -59,44 +66,22 @@ class MessagesController < ApplicationController
     history << { role: "user", content: @message.content }
 
     [
-      { role: "system", content: "Tu es un assistant qui aide l'utilisateur sur son projet de bricolage / travaux." }
+      {
+        role: "system",
+        content: "You are an assistant who helps the user with their DIY or renovation project.
+          Before providing a solution, always begin by asking a first question about the type of materials they want to use,
+          and a second question about the tools they have available. Then provide the methodology,
+          unless the user has already provided everything you need.
+          Your questions must be concrete, useful, and directly related to the project.
+          If the request is incomplete or ambiguous, always start by asking for clarification.
+          Finish in no more than 5 steps.
+          Answer format should be a JSON with the following keys :
+          - tools with the list of tools in markdown syntaxe - do not use an array,
+          - materials with the list of materials in markdown syntaxe - do not use an array,
+          - methodology with the whole methodology in markdown syntaxe - do not use an array,
+          - message with the whole message that can be displayed in the chatroom with our user. It includes tools, materials and methodology.
+          Be consistent in the json."
+      }
     ] + history
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class MessagesController < ApplicationController
-#   def index
-#     @project = current_user.projects.find(params[:project_id])
-#     @message = Message.new
-#     @messages = @project.messages.order(:created_at)
-#   end
-
-#   def create
-#     @message = Message.new(message_params)
-#     @message.user = current_user
-#     @message.save
-#     redirect_to messages_path
-#   end
-
-#   private
-
-#   def message_params
-#     params.require(:message).permit(:content)
-#   end
-# end
