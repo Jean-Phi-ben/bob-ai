@@ -12,10 +12,10 @@ class Project < ApplicationRecord
   validates :title, presence: true
   validates :status, inclusion: { in: STATUSES }, allow_blank: true
   validates :category, inclusion: { in: CATEGORIES }, allow_blank: true
-  validate :tools_are_valid
-  validate :materials_are_valid
+  # validate :tools_are_valid
+  # validate :materials_are_valid
 
-  before_validation :normalize_arrays
+  # before_validation :normalize_arrays
 
   private
 
