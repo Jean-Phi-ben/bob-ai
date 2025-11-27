@@ -47,6 +47,7 @@ class MessagesController < ApplicationController
     end
   end
 
+
   private
 
   def set_project
@@ -95,3 +96,5 @@ def build_conversation_messages
           Be consistent in the json."}]
   end
 end
+
+# Retourner un fichier JSON avec 4 clés = messages, tools, materials et methodo.
