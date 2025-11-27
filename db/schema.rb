@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_140717) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.string "category"
-    t.string "status"
+    t.string "status", default: "ongoing"
     t.string "tools", array: true
     t.string "materials", array: true
     t.text "methodology"
