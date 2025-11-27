@@ -37,6 +37,7 @@ class MessagesController < ApplicationController
     end
   end
 
+
   private
 
   def set_project
@@ -72,3 +73,5 @@ Finish in no more than 5 steps."
     ] + history
   end
 end
+
+# Retourner un fichier JSON avec 4 clés = messages, tools, materials et methodo.
