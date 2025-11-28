@@ -159,7 +159,7 @@
     </div>
 
     <!-- FOOTER LINKS -->
-    <div style="margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap;">
+    <div style="margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap;", class="d-flex align-space-between">
       <%= link_to "Back to My projects", projects_path,
             style: "
               display: inline-block;
@@ -171,6 +171,8 @@
               border: 1px solid rgba(129,140,248,0.6);
               background: transparent;
             " %>
+             <%= link_to "Back to conversationt", project_messages_path(@project),  class: "btn btn-outline-light btn-sm rounded-pill px-3" %>
+
     </div>
 
 

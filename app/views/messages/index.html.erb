@@ -17,11 +17,14 @@
 <!-- FULL TRANSPARENT CHAT -->
 <div class="container py-4" style="max-width: 900px;">
 
+
   <!-- TITLE -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div>
       <h1 style="color: white; font-size: 26px; font-weight: 700; margin: 0;">
         <%= @project.title %>
+        <%= link_to "View current project", project_path(@project),
+               class: "btn btn-outline-light btn-sm rounded-pill px-3" %>
       </h1>
       <p style="color: #cbd5e1; font-size: 13px; margin: 0;">
         Discussion avec BOB.AI sur ce projet
@@ -40,7 +43,9 @@
     padding: 8px 4px;
   ">
 
+
     <% @project.messages.each do |message| %>
+
 
       <% if message.role == "user" %>
         <!-- USER MESSAGE -->
