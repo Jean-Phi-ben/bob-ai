@@ -1,16 +1,198 @@
-<h1><%= @project.title %></h1>
+<!-- VANTA BACKGROUND -->
+<div id="vanta-bg" style="position: fixed; inset: 0; z-index: -1;"></div>
 
-<hr>
+<!-- DARK OVERLAY -->
+<div style="
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(15,23,42,0.4), rgba(15,23,42,0.9));
+  z-index: 0;
+"></div>
 
-<div class="container">
-  <% if @project.tools %>
-    <h2>tools</h2>
-    <p><%= raw(render_markdown(@project.tools)) %></p>
-  <% end %>
+<!-- PAGE CONTENT -->
+<div style="
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 16px 40px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  color: #E5E7EB;
+">
 
-  <h2>materials</h2>
-  <p><%=raw(render_markdown(@project.materials)) %></p>
+  <div style="
+    width: 100%;
+    max-width: 880px;
+    background: rgba(15,23,42,0.94);
+    border-radius: 20px;
+    padding: 28px 26px 30px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.75);
+    border: 1px solid rgba(148,163,184,0.45);
+    backdrop-filter: blur(12px);
+  ">
 
-  <h2>methodology: </h2>
-  <p><%= raw(render_markdown(@project.methodology))  %></p>
-</div>
+    <!-- HEADER : TITLE + META -->
+    <header style="margin-bottom: 18px;">
+      <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      ">
+        <div>
+          <h1 style="font-size: 30px; font-weight: 700; margin: 0 0 6px; color: #F9FAFB;">
+            <%= @project.title %>
+          </h1>
+
+          <% if @project.category.present? || @project.status.present? %>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; margin-top: 4px;">
+              <% if @project.category.present? %>
+                <span style="
+                  padding: 4px 10px;
+                  border-radius: 999px;
+                  background: rgba(30,64,175,0.25);
+                  border: 1px solid rgba(129,140,248,0.5);
+                  color: #BFDBFE;
+                ">
+                  🧰 <%= @project.category %>
+                </span>
+              <% end %>
+
+              <% if @project.status.present? %>
+                <% status_color =
+                    case @project.status
+                    when "ongoing" then "#F97316"
+                    when "finished" then "#22C55E"
+                    else "#E5E7EB"
+                    end %>
+                <span style="
+                  padding: 4px 10px;
+                  border-radius: 999px;
+                  border: 1px solid rgba(148,163,184,0.6);
+                  color: <%= status_color %>;
+                  text-transform: uppercase;
+                  letter-spacing: 0.08em;
+                  font-weight: 600;
+                ">
+                  <%= @project.status %>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
+    <hr style="border: none; border-top: 1px solid rgba(148,163,184,0.4); margin: 12px 0 22px;">
+
+    <!-- BODY : 3 BLOCS CLAIRS -->
+    <div class="container" style="padding: 0; display: grid; gap: 18px;">
+
+      <% if @project.tools.present? %>
+        <section style="margin-bottom: 4px;">
+          <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 4px; color: #E5E7EB;">
+            🛠 Tools you’ll use
+          </h2>
+          <p style="font-size: 12px; color: #9CA3AF; margin: 0 0 8px;">
+            List of tools required to complete this project.
+          </p>
+          <div style="
+            font-size: 14px;
+            color: #CBD5E1;
+            background: rgba(15,23,42,0.96);
+            border: 1px solid rgba(71,85,105,0.9);
+            padding: 10px 12px;
+            border-radius: 10px;
+            line-height: 1.5;
+          ">
+            <%= raw(render_markdown(@project.tools)) %>
+          </div>
+        </section>
+      <% end %>
+
+      <% if @project.materials.present? %>
+        <section style="margin-bottom: 4px;">
+          <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 4px; color: #E5E7EB;">
+            🔩 Materials you’ll need
+          </h2>
+          <p style="font-size: 12px; color: #9CA3AF; margin: 0 0 8px;">
+            All consumables and parts to prepare before you start.
+          </p>
+          <div style="
+            font-size: 14px;
+            color: #CBD5E1;
+            background: rgba(15,23,42,0.96);
+            border: 1px solid rgba(71,85,105,0.9);
+            padding: 10px 12px;
+            border-radius: 10px;
+            line-height: 1.5;
+          ">
+            <%= raw(render_markdown(@project.materials)) %>
+          </div>
+        </section>
+      <% end %>
+
+      <% if @project.methodology.present? %>
+        <section>
+          <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 4px; color: #E5E7EB;">
+            📋 Methodology (step-by-step)
+          </h2>
+          <p style="font-size: 12px; color: #9CA3AF; margin: 0 0 8px;">
+            Follow these steps in order. You can tick them as you go in your notes.
+          </p>
+          <div style="
+            font-size: 14px;
+            color: #CBD5E1;
+            background: rgba(15,23,42,0.98);
+            border: 1px solid rgba(71,85,105,0.9);
+            padding: 12px 13px;
+            border-radius: 10px;
+            line-height: 1.6;
+          ">
+            <%= raw(render_markdown(@project.methodology)) %>
+          </div>
+        </section>
+      <% end %>
+
+    </div>
+
+    <!-- FOOTER LINKS -->
+    <div style="margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap;">
+      <%= link_to "Back to My projects", projects_path,
+            style: "
+              display: inline-block;
+              font-size: 13px;
+              color: #A5B4FC;
+              text-decoration: none;
+              padding: 8px 16px;
+              border-radius: 999px;
+              border: 1px solid rgba(129,140,248,0.6);
+              background: transparent;
+            " %>
+    </div>
+
+
+<!-- VANTA CELLS SCRIPT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.VANTA) {
+    window.VANTA.CELLS({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      color2: 0x2b009a,
+      size: 1.00,
+      speed: 3.90
+    });
+  }
+});
+</script>
