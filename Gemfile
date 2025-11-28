@@ -84,3 +84,8 @@ gem "ruby-openai"
 gem "kramdown"
 gem "rouge"
 gem "kramdown-parser-gfm"
+
+gem "solid_cable"
+
+gem "ruby_llm", "~> 1.2.0"
+

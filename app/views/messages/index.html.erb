@@ -1,3 +1,5 @@
+<%= turbo_stream_from @project %>
+
 <h1><%= @project.title %></h1>
 
 <hr>
@@ -6,20 +8,7 @@
 
 <div id="messages">
   <% @project.messages.each do |message| %>
-    <% if message.role == "user" %>
-      <div class="d-flex justify-content-end mb-2">
-        <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
-          <%= raw(render_markdown(message.content)) %>
-        </div>
-      </div>
-
-    <% elsif message.role == "assistant" %>
-      <div class="d-flex justify-content-start mb-5">
-        <div class="px-3 pb-0 pt-3">
-          <%= raw(render_markdown(message.content)) %>
-        </div>
-      </div>
-    <% end %>
+     <%= render "messages/message", message: message %>
   <% end %>
 </div>
 
@@ -30,7 +19,7 @@
 
 <%= form_with model: [@project, Message.new], local: true do |f| %>
   <div>
-    <%= f.text_area :content, rows: 3, placeholder: "Write your message..." %>
+    <%= f.text_area :content, rows: 3, placeholder: "Write your message...", class: "w-100"%>
   </div>
 
   <div style="margin-top: 10px;">
@@ -41,8 +30,3 @@
 <hr>
 
 <%= link_to "Back", projects_path, class: "btn btn-secondary" %>
-
-
-<%= @messages.each do |message|  %>
-<%= message %>
-<% end %>
