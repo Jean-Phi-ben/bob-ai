@@ -64,7 +64,7 @@ class MessagesController < ApplicationController
       @assistant_message.update(content: parsed_response["message"])
       broadcast_replace(@assistant_message)
 
-      redirect_to project_messages_path(@project)
+      # redirect_to project_messages_path(@project)
     else
       @messages = @project.messages.order(:created_at)
       render :index, status: :unprocessable_entity
