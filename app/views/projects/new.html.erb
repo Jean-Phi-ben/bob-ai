@@ -53,22 +53,33 @@
     <%= form_with model: @project, local: true, class: "create-form" do |f| %>
 
       <!-- Title -->
-      <div class="field" style="margin-bottom: 18px;">
-        <%= f.label :title, "Project title", class: "field-label", style: "display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #E2E8F0;" %>
-        <%= f.text_field :title,
-              placeholder: "Ex: Repair kitchen cabinet, install lighting...",
-              class: "input",
-              style: "
-                width: 100%;
-                background: rgba(2,6,23,0.85);
-                border: 1px solid #475569;
-                border-radius: 10px;
-                padding: 10px 12px;
-                font-size: 14px;
-                color: #E5E7EB;
-                outline: none;
-              " %>
-      </div>
+    <div class="field" style="margin-bottom: 18px;">
+
+  <div style="display: flex; align-items: center; gap: 4px;">
+    <%= f.label :title,
+        "Project title",
+        class: "field-label",
+        style: "font-size: 13px; font-weight: 600; color: #E2E8F0;" %>
+
+    <span style="color: red; font-size: 14px; font-weight: bold;">*</span>
+  </div>
+
+  <%= f.text_field :title,
+        placeholder: "Ex: Repair kitchen cabinet, install lighting...",
+        class: "input",
+        style: "
+          width: 100%;
+          background: rgba(2,6,23,0.85);
+          border: 1px solid #475569;
+          border-radius: 10px;
+          padding: 10px 12px;
+          font-size: 14px;
+          color: #E5E7EB;
+          outline: none;
+        " %>
+
+</div>
+
 
       <!-- Description -->
       <div class="field" style="margin-bottom: 18px;">
@@ -89,6 +100,20 @@
                 resize: vertical;
               " %>
       </div>
+
+  <div style="margin-top: 20px;">
+    <%= f.submit "Create Project", style: "
+      background: #4F46E5;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 17px;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    " %>
+  </div>
 
     <% end %>
 
